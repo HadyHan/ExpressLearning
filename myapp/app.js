@@ -7,10 +7,11 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var settings = require('./settings');
+var flash = require('connect-flash');
 
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
-var flash = require('connect-flash');
+
 
 // var users = require('./routes/users');
 
