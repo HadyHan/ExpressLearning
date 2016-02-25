@@ -11,7 +11,7 @@ var flash = require('connect-flash');
 
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
-
+var dbUrl = "mongodb://" + settings.host + "/" + settings.db;
 
 // var users = require('./routes/users');
 
@@ -22,6 +22,22 @@ var app = express();
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
+
+app.use(session({
+    resave: false,
+    saveUninitialized: true,
+    secret: settings.cookieSecret,
+    key: settings.db,
+    cookie: {
+
+        maxAge: 1000 * 60 * 60 * 24 * 30
+    },
+    store: new MongoStore({
+
+        url: dbUrl
+    })
+}));
+
 app.use(flash());
 
 // uncomment after placing your favicon in /public
@@ -59,6 +75,7 @@ if (app.get('env') === 'development') {
 
 // production error handler
 // no stacktraces leaked to user
+
 app.use(function (err, req, res, next) {
     res.status(err.status || 500);
     res.render('error', {
@@ -66,17 +83,5 @@ app.use(function (err, req, res, next) {
         error: {}
     });
 });
-
-//将会化信息存储到mongoldb
-app.use(session({
-    secret: settings.cookieSecret,
-    key: settings.db,//cookie name
-    cookie: {maxAge: 1000 * 60 * 60 * 24 * 30},//30 days
-    store: new MongoStore({
-        db: settings.db,
-        host: settings.host,
-        port: settings.port
-    })
-}));
 
 module.exports = app;
