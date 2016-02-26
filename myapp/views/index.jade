@@ -13,7 +13,8 @@ block content
     p Welcome to #{title}
 
     each post,index in posts
-        h2= post.title
+        h2
+            a(href="#")= post.title
         .info
                 p 作者:
                     span= post.name
