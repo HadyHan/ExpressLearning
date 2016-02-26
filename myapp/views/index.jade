@@ -2,4 +2,21 @@ extends layout
 
 block content
   h1= title
-  p Welcome to #{title}
+
+  article
+
+    - if(success)
+      P #{success}
+    - if(error)
+      p #{error}
+
+    p Welcome to #{title}
+
+    each post,index in posts
+        h2= post.title
+        .info
+                p 作者:
+                    span= post.name
+                p 日期
+                    span= post.time.minute
+        p= post.post

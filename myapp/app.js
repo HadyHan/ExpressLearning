@@ -13,8 +13,6 @@ var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
 var dbUrl = "mongodb://" + settings.host + "/" + settings.db;
 
-// var users = require('./routes/users');
-
 var app = express();
 
 // view engine setup
