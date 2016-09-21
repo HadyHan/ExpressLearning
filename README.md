@@ -1,6 +1,10 @@
-# ExpressLearning
+# Express boilerplate
 
-使用 Express + MongoDB 搭建多人博客  
+## Quick start
 
-参考教程 [https://github.com/nswbmw/N-blog](https://github.com/nswbmw/N-blog/wiki/_pages)
-
+```bash
+git clone git@git.learning-tech.cn:yikai/express-boilerplate.git
+cd express-boilerplate
+npm install && bower install
+npm start
+```
